@@ -2,27 +2,27 @@
 
 _dev_ is the device you are installing Arch onto
 
-## The steps
+## Steps
 
 1. Disable "Secure Boot" in the BIOS.
 1. Boot into Arch Linux live installation media. Make sure that you know which disk is used for your
-   installation. We'll assume it's `/dev/sda`.  You can use `blkid` to list block devices.
-1. If you're using Wifi, launch `iwctl`. You're network should be automatically configured if
-   you're using wired network.
+   installation. We'll assume it's `/dev/sda`, but if you use M.2, it's likely `/dev/nvmenX`.  You can use `blkid` to list block devices.
+1. If you're using Wifi, launch `iwctl`.
+1. If wired, you should be good. If not, use `ip` and `dmesg` to debug.
 1. Partition your disk:
-   1. Run `cfdisk _dev_` for partitioning
+   1. Run `cfdisk ` _dev_ for partitioning
    1. Choose GPT partitioning (if you don't get the option to choose ,please run `cfdisk -z`)
-   1. Create a 512MiB partition. Set its type to `EFI System`
-   1. Create a swap partition. 4GiB will probably do. Set its type to `Linux Swap`
-   1. Create a partition for the rest of the drive. (that should create /dev/sda3)
+   1. Create a 1GB EFI boot partition. Set its type to `EFI System`. 
+   1. Create a swap partition. 16GiB will probably do. If you have over 32GB RAM, probably not needed. Set its type to `Linux Swap`
+   1. Create a partition for the rest of the drive.
    1. `mkswap /dev/sda2`
    1. `swapon /dev/sda2`
    1. `mkfs.vfat -F32 /dev/sda1`
-   1. `mkfs.xfs /dev/sda3`
+   1. `mkfs.ext4 /dev/sda3`
    1. `mount /dev/sda3 /mnt`
    1. `mkdir /mnt/boot`
    1. `mount /dev/sda1 /mnt/boot`
-1. `pacstrap /mnt base intel-ucode sudo linux linux-firmware xfsprogs neovim`
+1. `pacstrap /mnt base sudo linux linux-firmware vim dev`
 1. `genfstab -U /mnt >> /mnt/etc/fstab`
 1. `arch-chroot /mnt`
 1. `ln -sf /usr/share/zoneinfo/Region/City /etc/localtime` (you can see all the options in [wiki timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones))
@@ -38,7 +38,7 @@ _dev_ is the device you are installing Arch onto
 1. `useradd -m <your_username>`
 1. `usermod -G wheel -a <your_username>`
 1. `passwd <your_username>` - Set the user password
-1. `EDITOR=nvim visudo` - Uncomment the line containing the `wheel` group
+1. `EDITOR=vim visudo` - Uncomment the line containing the `wheel` group
 1. Install the bootloader - [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot)
     1. `bootctl --path=/boot install`
     1. Edit `/etc/pacman.d/hooks/systemd-boot.hook`:
