@@ -33,7 +33,7 @@ curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/
 
 chmod +x /mnt/tmp/second-stage.sh
 
-arch-chroot /mnt /bin/bash /mnt/tmp/second-stage.sh
+arch-chroot /mnt /bin/bash /mnt/tmp/second-stage.sh $1 $2
 
 rm /mnt/root/second-stage.sh
 
