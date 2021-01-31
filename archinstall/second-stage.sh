@@ -39,4 +39,4 @@ echo 'initrd /initramfs-linux.img' >> /boot/loader/entries/arch.conf
 echo 'options cryptdevice=UUID=$uuid:vg0 root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rw intel_pstate=no_hwp' >> /boot/loader/entries/arch.conf
 
 
-echo 'Install complete. Need to exit, unmount -a and reboot!'
+echo 'Install complete. At next boot, install custom things?'
