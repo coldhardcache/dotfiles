@@ -24,13 +24,13 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 # pacstrap
 pacstrap /mnt base base-devel bash linux linux-firmware vim git sudo efibootmgr dialog tmux lvm2 iwd zsh
-
+read  -n 1
 genfstab -pU /mnt | tee -a /mnt/etc/fstab
-
+read  -n 1
 echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
 curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/tmp/second-stage.sh
-
+read  -n 1
 chmod +x /mnt/tmp/second-stage.sh
 
 arch-chroot /mnt /bin/bash /mnt/tmp/second-stage.sh $1 $2
