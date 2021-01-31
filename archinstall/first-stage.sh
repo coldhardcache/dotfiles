@@ -29,6 +29,8 @@ genfstab -pU /mnt | tee -a /mnt/etc/fstab
 read  -n 1
 echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
+sed -i 's/relatime/noatime/g' /mnt/etc/fstab
+
 curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/root/second-stage.sh
 read  -n 1
 chmod +x /mnt/root/second-stage.sh
