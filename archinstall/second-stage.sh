@@ -42,5 +42,3 @@ echo 'options cryptdevice=UUID=$uuid:vg0 root=/dev/mapper/vg0-root resume=/dev/m
 echo 'Install complete. At next boot, start ricing?'
 sleep 5
 
-exit
-
