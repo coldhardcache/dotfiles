@@ -29,11 +29,11 @@ genfstab -pU /mnt | tee -a /mnt/etc/fstab
 read  -n 1
 echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
-curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/tmp/second-stage.sh
+curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/root/second-stage.sh
 read  -n 1
-chmod +x /mnt/tmp/second-stage.sh
+chmod +x /mnt/root/second-stage.sh
 
-arch-chroot /mnt /bin/bash /mnt/tmp/second-stage.sh $1 $2
+arch-chroot /mnt /bin/bash /root/second-stage.sh $1 $2
 
 rm /mnt/root/second-stage.sh
 
