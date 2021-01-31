@@ -2,6 +2,7 @@ echo "Beginning Part one of the install Script"
 
 # Assumption that the two partitions have been made!!!
 # $1 is the install drive
+# $2 is the username
 # cryptsetup
 mkfs.vfat -F32 -n EFI $1p1
 cryptsetup --use-random luksFormat $1p2
@@ -22,17 +23,17 @@ mkdir /mnt/boot
 mount /dev/nvme0n1p1 /mnt/boot
 
 # pacstrap
-pacstrap /mnt base base-devel bash linux linux-firmware vim git sudo efibootmgr dialog tmux lvm2 iwd zsh intel-ucode
+pacstrap /mnt base base-devel bash linux linux-firmware vim git sudo efibootmgr dialog tmux lvm2 iwd zsh
 
 genfstab -pU /mnt | tee -a /mnt/etc/fstab
 
 echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
-curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/root/second-stage.sh
+curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/tmp/second-stage.sh
 
-chmod +x /mnt/root/second-stage.sh
+chmod +x /mnt/tmp/second-stage.sh
 
-arch-chroot /mnt /mnt/root/second-stage.sh
+arch-chroot /mnt /bin/bash /mnt/tmp/second-stage.sh
 
 rm /mnt/root/second-stage.sh
 
