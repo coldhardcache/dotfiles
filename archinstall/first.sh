@@ -30,6 +30,14 @@ echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
 curl 'https://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/root/arch2.sh
 
-chmod +x /mnt/root/arch2.sh
+chmod +x /mnt/root/second-stage.sh
 
-arch-chroot /mnt /mnt/arch2.sh
+arch-chroot /mnt /mnt/root/second-stage.sh
+
+rm /mnt/root/second-stage.sh
+
+umount -R /mnt
+
+swapoff -a
+
+reboot
