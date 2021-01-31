@@ -28,7 +28,7 @@ genfstab -pU /mnt | tee -a /mnt/etc/fstab
 
 echo "tmpfs   /tmp	tmpfs	defaults,noatime,mode=1777	0	0" >> /mnt/etc/fstab
 
-curl ' ' ? /mnt/root/arch2.sh
+curl 'http://raw.githubusercontent.com/coldhardcache/dotfiles/main/archinstall/second-stage.sh' > /mnt/root/arch2.sh
 
 chmod +x /mnt/root/arch2.sh
 
