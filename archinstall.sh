@@ -51,9 +51,8 @@ groupadd $2
 useradd -m -g $2 -G wheel,storage,power,network,uucp -s /bin/zsh $2
 passwd $2
 
-vim /etc/mkinitcpio.conf
 sed -i 's/MODULES=()/MODULES=(ext4)/g' /etc/mkinitcpio.conf
-sed -i 's/ udev / udev encrypt lvm2 resume/g' /etc/mkinitcpio.conf
+sed -i 's/HOOKS=(base udev/ HOOKS=(base udev encrypt lvm2 resume /g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 bootctl --path=/boot install
