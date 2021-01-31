@@ -40,3 +40,7 @@ echo 'options cryptdevice=UUID=$uuid:vg0 root=/dev/mapper/vg0-root resume=/dev/m
 
 
 echo 'Install complete. At next boot, install custom things?'
+sleep 5
+
+exit
+
