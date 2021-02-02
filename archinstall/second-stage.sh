@@ -14,6 +14,8 @@ localectl set-locale LANG=en_US.UTF-8
 echo LANG=en_US.UTF-8 >> /etc/locale.conf
 echo LC_ALL= >> /etc/locale.conf
 
+sed -i -e 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
+
 echo 'This prompt is for ROOT PASSWORD'
 passwd
 groupadd $2
