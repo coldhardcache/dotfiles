@@ -20,7 +20,7 @@ mkswap /dev/mapper/vg0-swap
 mount /dev/mapper/vg0-root /mnt # /mnt is the installed system
 swapon /dev/mapper/vg0-swap # Not needed but a good thing to test
 mkdir /mnt/boot
-mount /dev/nvme0n1p1 /mnt/boot
+mount $1p1 /mnt/boot
 
 # pacstrap
 pacstrap /mnt base base-devel bash linux linux-firmware vim git sudo efibootmgr dialog tmux lvm2 iwd zsh
